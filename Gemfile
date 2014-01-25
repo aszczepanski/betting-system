@@ -6,6 +6,7 @@ gem 'rails', '3.2.12'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'simple_form'
 
 
 # Gems used only for assets and not required
@@ -24,6 +25,7 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem 'foreigner'
+gem 'pry'
 gem 'cancan'
 
 # To use ActiveModel has_secure_password
