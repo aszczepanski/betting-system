@@ -26,21 +26,23 @@
 <% if can? :read, Event %>
   <h3>Events</h3>
   <% @tournament.events.each do |event| %>
-    <div>
-      <strong><font size=4><%= link_to event.name, event %></font></strong>
-      <br />
-      <p><%= event.description %></p>
-    </div>
-    <% if current_user.answered? event.id %>
-    <p><b>Your answer: </b><i><%= current_user.answer(event.id) %></i></p>
-    <% elsif can? :create, Bet and !event.blocked %>
-    <% @bet = event.bets.build %>
-    <%= render 'bets/form' %>
-    <% end %>
-    <% if event.correct_answer != nil %>
-    <p><b>Correct answer: </b><i><%= event.correct_answer_name %></i></p>
-    <% elsif event.blocked == true %>
-    <p><font color="red">Event blocked.</font></p>
+    <% if event.id != nil %>
+      <div>
+        <strong><font size=4><%= link_to event.name, event %></font></strong>
+        <br />
+        <p><%= event.description %></p>
+      </div>
+      <% if current_user.answered? event.id %>
+      <p><b>Your answer: </b><i><%= current_user.answer(event.id) %></i></p>
+      <% elsif can? :create, Bet and !event.blocked %>
+      <% @bet = event.bets.build %>
+      <%= render 'bets/form' %>
+      <% end %>
+      <% if event.correct_answer != nil %>
+      <p><b>Correct answer: </b><i><%= event.correct_answer_name %></i></p>
+      <% elsif event.blocked == true %>
+      <p><font color="red">Event blocked.</font></p>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

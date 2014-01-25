@@ -12,7 +12,7 @@ class Ability
       can :read, :all  # remove Role maybe?
     end
     if user.has_role? :player
-      can :read, [Tournament, Event]
+      can :read, [Tournament, Event, Answer]
       can :create, Bet
     end
     if user.has_role? :guest
