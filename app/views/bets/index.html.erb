@@ -1,0 +1,29 @@
+<h1>Listing bets</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Event</th>
+    <th>Bet date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bets.each do |bet| %>
+  <tr>
+    <td><%= bet.user_name %></td>
+    <td><%= bet.event_name %></td>
+    <td><%= bet.bet_date.strftime('%B %e, %l:%M %p') %></td>
+    <td><%= link_to 'Show', bet %></td>
+    <td><% if can? :update, Bet %>
+      <%= link_to 'Edit', edit_bet_path(bet) %>
+    <% end %></td>
+    <td><% if can? :delete, Bet %>
+      <%= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

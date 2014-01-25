@@ -1,0 +1,32 @@
+<h1>Listing tournaments</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tournaments.each do |tournament| %>
+  <tr>
+    <td><%= link_to tournament.name, tournament %></td>
+    <td><%= tournament.description %></td>
+    <td><%= tournament.category_name %></td>
+    <td><% if can? :update, Tournament %>
+      <%= link_to 'Edit', edit_tournament_path(tournament) %>
+    <% end %></td>
+    <td><% if can? :delete, Tournament %>
+      <%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if can? :create, Tournament %>
+<%= link_to 'New Tournament', new_tournament_path %>
+<% end %>

@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<h2><%= @tournament.name %></h2>
+
+<p>
+  <b>Category:</b>
+  <%= @tournament.category_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @tournament.description %>
+</p>
+
+<% if can? :update, Tournament %>
+<%= link_to 'Edit', edit_tournament_path(@tournament) %>
+<% end %>
+
+<h3>Rank</h3>
+<% @tournament.current_rank.each do |user,sum| %>
+  <div>
+    <strong><%= user.username %></strong>  <%= sum %>
+  </div>
+<% end %>
+
+<% if can? :read, Event %>
+  <h3>Events</h3>
+  <% @tournament.events.each do |event| %>
+    <div>
+      <strong><font size=4><%= link_to event.name, event %></font></strong>
+      <br />
+      <p><%= event.description %></p>
+    </div>
+    <% if current_user.answered? event.id %>
+    <p><b>Your answer: </b><i><%= current_user.answer(event.id) %></i></p>
+    <% elsif can? :create, Bet and !event.blocked %>
+    <% @bet = event.bets.build %>
+    <%= render 'bets/form' %>
+    <% end %>
+    <% if event.correct_answer != nil %>
+    <p><b>Correct answer: </b><i><%= event.correct_answer_name %></i></p>
+    <% elsif event.blocked == true %>
+    <p><font color="red">Event blocked.</font></p>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if can? :create, Event %>
+<%= render 'events/form' %>
+<% end %>
+
+

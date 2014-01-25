@@ -1,0 +1,30 @@
+<h1>Welcome to betting system</h1>
+<p>List of most recent bets:</p>
+
+<table>
+  <tr>
+    <th>Tournament</th>
+    <th>Event</th>
+    <th>User</th>
+    <th>Bet time</th>
+    <th>Answer</th>
+    <% if can? :create, Bet %>
+      <th>Your answer</th>
+    <% end %>
+  </tr>
+
+<% @bets.each do |bet| %>
+  <tr>
+    <td><%= link_to bet.tournament_name, bet.tournament %></td>
+    <td><%= link_to bet.event_name, bet.event %></td>
+    <td><%= bet.user_name %></td>
+    <td><%= bet.bet_date.strftime('%B %e, %l:%M %p') %></td>
+    <td><%= bet.answer_name %></td>
+    <% if can? :create, Bet %>
+      <td><%= current_user.answer(bet.event_id) %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />

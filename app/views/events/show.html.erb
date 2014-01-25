@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @event.name %>
+</p>
+
+<% if @event.description != '' %>
+<p>
+  <b>Description:</b>
+  <%= @event.description %>
+</p>
+<% end %>
+
+<p>
+  <b>Tournament:</b>
+  <%= @event.tournament_name %>
+</p>
+
+<% if can? :update, Event %>
+<%= link_to 'Edit event', edit_event_path(@event) %>
+<% end %>
+
+<% if can? :read, Answer %>
+  <h3>Answers</h3>
+  <% @event.answers.each do |answer| %>
+    <div>
+      <strong><%= answer.name %></strong>
+    </div>
+  <% end %>
+<% end %>
+
+<% if can? :create, Answer %>
+<h3>Add answer</h3>
+<%= render 'answers/form' %>
+<% end %>
+
+<% if can? :create, Bet %>
+<h3>Create bet</h3>
+<%= render 'bets/form' %>
+<% end %>

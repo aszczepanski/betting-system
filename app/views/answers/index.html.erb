@@ -1,0 +1,26 @@
+<h1>Listing answers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Event</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @answers.sort { |a,b| a.event_name <=> b.event_name }.each do |answer| %>
+  <tr>
+    <td><%= link_to answer.name, answer %></td>
+    <td><%= link_to_if can?(:read, Event), answer.event_name, answer.event %></td>
+    <td><% if can? :update, Answer %>
+      <%= link_to 'Edit', edit_answer_path(answer) %>
+    <% end %></td>
+    <td><% if can? :delete, Answer %>
+      <%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
