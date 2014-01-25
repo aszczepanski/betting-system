@@ -16,6 +16,7 @@
 <%= link_to 'Edit', edit_tournament_path(@tournament) %>
 <% end %>
 
+<hr>
 <h3>Rank</h3>
 <% @tournament.current_rank.each do |user,sum| %>
   <div>
@@ -24,9 +25,11 @@
 <% end %>
 
 <% if can? :read, Event %>
+  <hr>
   <h3>Events</h3>
   <% @tournament.events.each do |event| %>
     <% if event.id != nil %>
+      <hr>
       <div>
         <strong><font size=4><%= link_to event.name, event %></font></strong>
         <br />
@@ -48,6 +51,7 @@
 <% end %>
 
 <% if can? :create, Event %>
+<hr>
 <%= render 'events/form' %>
 <% end %>
 

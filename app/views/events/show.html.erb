@@ -22,6 +22,7 @@
 <% end %>
 
 <% if can? :read, Answer %>
+  <hr>
   <h3>Answers</h3>
   <% @event.answers.each do |answer| %>
     <div>
@@ -30,12 +31,8 @@
   <% end %>
 <% end %>
 
-<% if can? :create, Answer %>
-<h3>Add answer</h3>
-<%= render 'answers/form' %>
-<% end %>
-
 <% if current_user.answered? @event.id %>
+<hr>
 <p><b>Your answer: </b><i><%= current_user.answer(@event.id) %></i></p>
 <% elsif can? :create, Bet and !@event.blocked %>
 <% @bet = @event.bets.build %>
@@ -45,4 +42,15 @@
 <p><b>Correct answer: </b><i><%= @event.correct_answer_name %></i></p>
 <% elsif @event.blocked == true %>
 <p><font color="red">Event blocked.</font></p>
+<% end %>
+
+<% if can? :create, Answer and @event.blocked? and !@event.has_correct_answer? %>
+<hr>
+<h3>Add answer</h3>
+<%= render 'answers/form' %>
+<% end %>
+
+<% if can? :update, Event %>
+<hr>
+<%= render 'block' %>
 <% end %>

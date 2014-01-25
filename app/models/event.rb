@@ -10,6 +10,10 @@ class Event < ActiveRecord::Base
     tournament.name
   end
 
+  def has_correct_answer?
+    return correct_answer != nil
+  end
+
   def correct_answer_name
     Answer.find(correct_answer).name
   end

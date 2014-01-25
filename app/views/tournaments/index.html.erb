@@ -5,9 +5,12 @@
     <th>Name</th>
     <th>Description</th>
     <th>Category</th>
+    <% if can? :update, Tournament %>
     <th></th>
+    <% end %>
+    <% if can? :delete, Tournament %>
     <th></th>
-    <th></th>
+    <% end %>
   </tr>
 
 <% @tournaments.each do |tournament| %>
@@ -15,12 +18,12 @@
     <td><%= link_to tournament.name, tournament %></td>
     <td><%= tournament.description %></td>
     <td><%= tournament.category_name %></td>
-    <td><% if can? :update, Tournament %>
-      <%= link_to 'Edit', edit_tournament_path(tournament) %>
-    <% end %></td>
-    <td><% if can? :delete, Tournament %>
-      <%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %></td>
+    <% if can? :update, Tournament %>
+      <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
+    <% end %>
+    <% if can? :delete, Tournament %>
+      <td><%= link_to 'Destroy', tournament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

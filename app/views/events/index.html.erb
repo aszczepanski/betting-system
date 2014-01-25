@@ -9,8 +9,12 @@
       <th>Answered</th>
     <% end %>
     <th>Blocked</th>
+    <% if can? :update, Event %>
     <th></th>
+    <% end %>
+    <% if can? :delete, Event %>
     <th></th>
+    <% end %>
   </tr>
 
 <% @events.each do |event| %>
@@ -22,12 +26,12 @@
       <td><%= current_user.answered? event.id %></td>
     <% end %>
     <td><%= event.blocked %></td>
-    <td><% if can? :update, Event %>
-      <%= link_to 'Edit', edit_event_path(event) %>
-    <% end %></td>
-    <td><% if can? :delete, Event %>
-      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
-    <% end %></td>
+    <% if can? :update, Event %>
+      <td><%= link_to 'Edit', edit_event_path(event) %></td>
+    <% end %>
+    <% if can? :delete, Event %>
+      <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

@@ -12,16 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.check_box :blocked %>
+    <%= f.label :blocked %> <br />
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
+  <div>
+    <%= f.label :correct_answer %>
+    <%= f.collection_select :correct_answer, @event.answers.order(:name), :id, :name, include_blank: true %><br />
   </div>
-  <%= f.hidden_field :tournament_id %>
-  <%= f.hidden_field :blocked %>
-  <%= f.hidden_field :correct_answer %>
   <div class="actions">
     <%= f.submit %>
   </div>
