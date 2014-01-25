@@ -15,7 +15,6 @@ class User < ActiveRecord::Base
 
   def has_role?(role)
     return !!self.roles.find_by_name(role.to_s.camelize)
-    # return true
   end
 
   def answered?(event_id)

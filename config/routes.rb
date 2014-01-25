@@ -19,7 +19,7 @@ BettingSystem::Application.routes.draw do
   resources :tournaments
   resources :events
   resources :categories
-  resources :bets, :only => [:index, :show]
+  resources :bets
   resources :answers
 
   # Sample resource route with options:

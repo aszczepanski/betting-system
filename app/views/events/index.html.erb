@@ -5,7 +5,9 @@
     <th>Name</th>
     <th>Description</th>
     <th>Tournament</th>
-    <th>Answered</th>
+    <% if can? :create, Bet %>
+      <th>Answered</th>
+    <% end %>
     <th>Blocked</th>
     <th></th>
     <th></th>
@@ -15,11 +17,17 @@
   <tr>
     <td><%= link_to event.name, event %></td>
     <td><%= event.description %></td>
-    <td><%= event.tournament_name %></td>
-    <td><%= current_user.answered? event.id %></td>
+    <td><%= link_to event.tournament_name, event.tournament %></td>
+    <% if can? :create, Bet %>
+      <td><%= current_user.answered? event.id %></td>
+    <% end %>
     <td><%= event.blocked %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><% if can? :update, Event %>
+      <%= link_to 'Edit', edit_event_path(event) %>
+    <% end %></td>
+    <td><% if can? :delete, Event %>
+      <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %></td>
   </tr>
 <% end %>
 </table>

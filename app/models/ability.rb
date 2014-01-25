@@ -10,10 +10,12 @@ class Ability
       can :update, [Category, Tournament, Event]
       can :destroy, Tournament
       can :read, :all  # remove Role maybe?
-    elsif user.has_role? :player
+    end
+    if user.has_role? :player
       can :read, [Tournament, Event]
       can :create, Bet
-    else
+    end
+    if user.has_role? :guest
       can :read, [Tournament, Event]
     end
     #
